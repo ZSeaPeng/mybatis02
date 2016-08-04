@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seapeng.inter.TBookMapper" >
+  <resultMap id="BaseResultMap" type="com.seapeng.model.TBook" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="BOOK_NAME" property="bookName" jdbcType="VARCHAR" />
+    <result column="BOOK_INTRO" property="bookIntro" jdbcType="VARCHAR" />
+    <result column="BOOK_PRICE" property="bookPrice" jdbcType="VARCHAR" />
+    <result column="IMAGE_URL" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="REPERTORY_SIZE" property="repertorySize" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BOOK_NAME, BOOK_INTRO, BOOK_PRICE, IMAGE_URL, AUTHOR, REPERTORY_SIZE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_book
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_book
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.seapeng.model.TBook" >
+    insert into t_book (ID, BOOK_NAME, BOOK_INTRO, 
+      BOOK_PRICE, IMAGE_URL, AUTHOR, 
+      REPERTORY_SIZE)
+    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookIntro,jdbcType=VARCHAR}, 
+      #{bookPrice,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{repertorySize,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.seapeng.model.TBook" >
+    insert into t_book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bookName != null" >
+        BOOK_NAME,
+      </if>
+      <if test="bookIntro != null" >
+        BOOK_INTRO,
+      </if>
+      <if test="bookPrice != null" >
+        BOOK_PRICE,
+      </if>
+      <if test="imageUrl != null" >
+        IMAGE_URL,
+      </if>
+      <if test="author != null" >
+        AUTHOR,
+      </if>
+      <if test="repertorySize != null" >
+        REPERTORY_SIZE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null" >
+        #{bookIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPrice != null" >
+        #{bookPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="repertorySize != null" >
+        #{repertorySize,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seapeng.model.TBook" >
+    update t_book
+    <set >
+      <if test="bookName != null" >
+        BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null" >
+        BOOK_INTRO = #{bookIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPrice != null" >
+        BOOK_PRICE = #{bookPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="repertorySize != null" >
+        REPERTORY_SIZE = #{repertorySize,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seapeng.model.TBook" >
+    update t_book
+    set BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      BOOK_INTRO = #{bookIntro,jdbcType=VARCHAR},
+      BOOK_PRICE = #{bookPrice,jdbcType=VARCHAR},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      REPERTORY_SIZE = #{repertorySize,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
